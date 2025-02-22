@@ -15,7 +15,7 @@ struct Pair {
 class LinkedList {
 private:
     Pair* head;
-
+    int size{};
 public:
     LinkedList() : head(nullptr) {}
 
@@ -24,6 +24,8 @@ public:
     }
 
     void pushBack(int value) {
+        size++;
+
         Pair* newPair = new Pair(value);
 
         if (head == nullptr) {
@@ -54,6 +56,7 @@ public:
     }
 
     void clear() {
+
         Pair* tmp = head;
 
         while (tmp != nullptr) {
@@ -61,27 +64,41 @@ public:
             delete tmp;
             tmp = next;
         }
-        head = nullptr
-;
+        head = nullptr;
+        size = 0;
     }
+
+    int getSize() const {
+        return size;
+    }
+
     int& operator[](int index) {
 		return get(index);
     }
 };
 
 int main() {
-    LinkedList list;
+    LinkedList list1;
 
-    list.pushBack(7);
-    list.pushBack(1);
+    list1.pushBack(7);
+    list1.pushBack(1);
 
-    list[0] = 2;
+    list1[0] = 2;
 
-    cout << list[0] << endl;
-    cout << list[1] << endl;
+    cout << list1[0] << endl;
+    cout << list1[1] << endl;
+
+    cout << "rozmiar: " << list1.getSize() << endl;
 
     //list.clear();
 
     //cout << list[0] << endl;
     //cout << list[1] << endl;
+
+    //LinkedList list2;
+
+    //list2.pushBack(8);
+    //list2.pushBack(4);
+
+    //list1 + list2;
 }
