@@ -2,8 +2,6 @@
 
 using namespace std;
 
-
-// Struktura reprezentujaca pojedynczy element listy (wezel)
 struct Pair {
     int data;
     Pair* next;
@@ -14,22 +12,17 @@ struct Pair {
     }
 };
 
-// Klasa implementuj¹ca listê jednokierunkow¹
 class LinkedList {
 private:
-    // wskaznik na pierwszy element tablicy
     Pair* head;
 
 public:
-    // Konstruktor klasy - inicjalizuje pusta liste (head = nullptr)
     LinkedList() : head(nullptr) {}
 
-    // Destruktor - wywoluje metode clear() aby zwolnic pamiec
     ~LinkedList() {
         clear();
     }
 
-    // Metoda dodaj¹ca element na koniec listy
     void pushBack(int value) {
         Pair* newPair = new Pair(value);
 
@@ -46,8 +39,7 @@ public:
         }
     }
 
-    // Metoda pobierajaca element o zadanym indeksie
-    int get(int index) {
+    int& get(int index) {
         Pair* tmp = head;
         int i = 0;
 
@@ -58,10 +50,9 @@ public:
             tmp = tmp->next;
             i++;
         }
-        return 0;
+        throw out_of_range("Out of bounds error");
     }
 
-    // Metoda czyszczaca liste (zwalniajaca pamiec)
     void clear() {
         Pair* tmp = head;
 
@@ -70,30 +61,27 @@ public:
             delete tmp;
             tmp = next;
         }
-        head = nullptr;
+        head = nullptr
+;
+    }
+    int& operator[](int index) {
+		return get(index);
     }
 };
 
-
-
-// Program glowny - przyklad uzycia listy:
-int main()
-{
-    // Tworzy pusta liste
+int main() {
     LinkedList list;
 
-    // Dodaje dwa elementy
     list.pushBack(7);
     list.pushBack(1);
 
-    // Wyswietla elementy o indeksach 0 i 1
-    cout << list.get(0) << endl;
-    cout << list.get(1) << endl;
+    list[0] = 2;
 
-    // Czyci liste
-    list.clear();
+    cout << list[0] << endl;
+    cout << list[1] << endl;
 
-    // Proba wyswietlenia elementy z pustej listy
-    cout << list.get(0) << endl;
-    cout << list.get(1) << endl;
+    //list.clear();
+
+    //cout << list[0] << endl;
+    //cout << list[1] << endl;
 }
